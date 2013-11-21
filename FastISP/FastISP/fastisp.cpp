@@ -139,7 +139,7 @@ void FastISP::ICWriteMemory( void )
 	m_showflag = 0;
 	ui.plainTextEdit_output->clear();
 
-	QFile t_filehandle(m_Filename);
+	QFile t_filehandle(ui.textEdit_path->toPlainText());
 	QTextStream t_textstream(&t_filehandle);
 	QStringList t_strList;
 	if (t_filehandle.open(QFile::ReadOnly | QFile::Truncate)){
