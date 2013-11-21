@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="FastISP">
+    <file>image/def.png</file>
+    <file>image/IC.png</file>
+  </qresource>
+</RCC>
