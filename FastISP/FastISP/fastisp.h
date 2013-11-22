@@ -2,6 +2,7 @@
 #define FASTISP_H
 
 #include <QtWidgets/QMainWindow>
+#include <QFileDialog>
 #include "ui_fastisp.h"
 #include "ispfunc.h"
 
@@ -16,6 +17,7 @@ public:
 private:
 	Ui::FastISPClass ui;
 	ISPfunc m_ispfunc;
+	QFileDialog* m_filedialog;
 
 private:
 	QStringList m_comlist;

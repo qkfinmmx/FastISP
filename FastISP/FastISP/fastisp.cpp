@@ -1,5 +1,4 @@
 #include <QMessageBox>
-#include <QFileDialog>
 #include <QTextStream>
 #include "fastisp.h"
 
@@ -10,6 +9,11 @@ FastISP::FastISP(QWidget *parent)
 
 	ui.setupUi(this);
 	uiinit();	//初始化ui对象
+
+	m_filedialog = new QFileDialog(this,Qt::Dialog);
+	m_filedialog->setFileMode(QFileDialog::FileMode::AnyFile);
+	m_filedialog->setNameFilter(QStringLiteral("IntelHex(*.hex)"));
+	m_filedialog->setViewMode(QFileDialog::ViewMode::Detail);
 	
 	// 连接信号
 	QObject::connect(ui.pushButton_readicinf,SIGNAL(clicked()),this,SLOT(ReadinfbtnClicked()));
@@ -175,8 +179,10 @@ void FastISP::ICWriteMemory( void )
 void FastISP::ToolbtnClicked( void )
 {
 	m_Filename = "";
-	m_Filename = QFileDialog::getOpenFileName(this,
-		QStringLiteral("打开文件"),"hexfile",QStringLiteral("2进制文件(*.hex)"));
+	if (m_filedialog->exec()){
+		 m_Filename = m_filedialog->selectedFiles().at(0);
+	}
+
 	if (!m_Filename.isEmpty()){
 		ui.textEdit_path->setHtml(m_Filename);
 	}
